@@ -9,6 +9,8 @@
 #include <thread>
 #include <tuple>
 #include <functional>
+#include <iostream>
+#include <utility>
 
 namespace xenon {
     namespace async {
@@ -33,17 +35,20 @@ namespace xenon {
 			std::thread(func).detach();
 		}
 
+		/**
+		* @brief Calls work_func asynchronously with results from callback_func, which gets called asynchronously.
+		* @param callback_func: The function which returns something
+		* @param work_func: The function which accepts that something that callback_func returns
+		* @param args: All the arguments to the callback_func
+		* @param timeout: After how many milliseconds to run the callback_func
+		* @retval None
+		*/
 		template<typename Ret, typename... Args>
-		inline void then(const std::function<Ret(Args...)>& callback_func, Args&&... args) noexcept {
-			std::thread([&](){
-				Ret ret = callback_func(std::forward<Args>(args)...);
-			}).detach();
-		}
-
-		template<typename Ret>
-		inline void then(const std::function<Ret(void)>& callback_func) noexcept {
-			std::thread([&](){
-				Ret ret = callback_func();
+		inline void then(const std::function<Ret(Args...)>& callback_func, const std::function<void(Ret)>& work_func, Args&&... args, const uint32_t timeout = 0) noexcept {
+			std::thread([=, &args...]() {
+				if(timeout)
+					std::this_thread::sleep_for(std::chrono::milliseconds(timeout));
+				work_func(callback_func(args...));
 			}).detach();
 		}
     } // namespace async

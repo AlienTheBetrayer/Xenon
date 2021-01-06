@@ -100,6 +100,13 @@ namespace xenon {
     } // namespace string
 
     /**
+     * @brief Module that is able to work with time.  
+     */
+    namespace time {
+
+    } // namespace time
+
+    /**
      * @brief Module that has utility stuff like Vector classes and more.
      */
     namespace utility {
