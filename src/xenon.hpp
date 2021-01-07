@@ -125,5 +125,6 @@ namespace xenon {
 
 // All the includes
 #include "async/async.hpp"
+#include "concepts/concepts.hpp"
 
 #endif // XENON_HG_LIB
