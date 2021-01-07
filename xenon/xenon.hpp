@@ -9,6 +9,7 @@
 // Library's dependencies
 #include "./macros.hpp"
 
+#ifdef XENON_M_CPP17GRT
 // All the namespaces declarations so we have the @brief on each of them.
 
 /**
@@ -138,5 +139,9 @@ namespace xenon {
 
 // All the other modules
 #include "async/async.hpp"
+
+#else // XENON_M_CPP17GRT
+#error xenon requires at least cpp17
+#endif // XENON_M_CPP17GRT
 
 #endif // XENON_HG_LIB

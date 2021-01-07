@@ -9,20 +9,28 @@
 #include <type_traits>
 
 namespace {
-    /**
-     * @brief A helper function. Should not be used by the user.
-     */
+    // -- Helper functions. Should not be used by the user. -- \\ 
+
     template<typename T, typename... Ts>
     concept XENON_HF_all_same = (std::is_same_v<T, Ts> && ...);
+
+    template<typename T, typename... Ts>
+    concept XENON_HF_atleast_same = (std::is_same_v<T, Ts> || ...);
 }
 
 namespace xenon {
     namespace concepts {
+        // --- ===== --- ===== --- Other --- ===== --- ===== --- \\ 
+
         /**
          * @brief Works with any T.  
          */
         template<typename T>
         concept always_satisfied = true;
+
+
+
+        // --- ===== --- ===== --- Types --- ===== --- ===== --- \\ 
 
         /**
          * @brief Works if T is integral.  
@@ -55,17 +63,37 @@ namespace xenon {
         concept arithmetic = floating_point<T> && integral<T>;
 
         /**
+         * @brief Works if T is a function.  
+         */
+        template<typename T>
+        concept function = std::is_function_v<T>;
+        
+
+
+        // --- ===== --- ===== --- Modifiers --- ===== --- ===== --- \\ 
+
+        /**
          * @brief Works if T is const.
          */
         template<typename T>
         concept constant = std::is_const_v<T>;
 
         /**
-         * @brief Works if T is a function.  
+         * @brief Works if T is a pointer. 
          */
         template<typename T>
-        concept function = std::is_function_v<T>;
-        
+        concept pointer = std::is_pointer_v<T>;
+
+        /**
+         * @brief Works if T is an array. 
+         */
+        template<typename T>
+        concept array = std::is_array_v<T>;
+
+
+
+        // --- ===== --- ===== --- Operators --- ===== --- ===== --- \\ 
+
         /**
          * @brief Works if T is callable with Args. 
          */
@@ -115,6 +143,10 @@ namespace xenon {
             t = t_;
         };
 
+
+
+        // --- ===== --- ===== --- References --- ===== --- ===== --- \\ 
+
         /**
          * @brief Works if T is a lvalue reference.  
          */
@@ -127,17 +159,7 @@ namespace xenon {
         template<typename T>
         concept rvalue_ref = std::is_rvalue_reference_v<T>;
 
-        /**
-         * @brief Works if T is a pointer. 
-         */
-        template<typename T>
-        concept pointer = std::is_pointer_v<T>;
-
-        /**
-         * @brief Works if T is an array. 
-         */
-        template<typename T>
-        concept array = std::is_array_v<T>;
+        // --- ===== --- ===== --- Equality of types --- ===== --- ===== --- \\ 
 
         /**
          * @brief Works if all Ts are the same types.  
@@ -146,10 +168,137 @@ namespace xenon {
         concept all_same = XENON_HF_all_same<Ts...>;
 
         /**
+         * @brief Works if there are at least two same types.
+         */
+        template<typename... Ts>
+        concept atleast_same = XENON_HF_atleast_same<Ts...>;
+
+        /**
          * @brief Works if T and T_ are the same types.  
          */
         template<typename T, typename T_>
         concept same = all_same<T, T_>;
+
+
+
+        // --- ===== --- ===== --- Iterators --- ===== --- ===== --- \\ 
+
+        /**
+         * @brief Works if T class has begin function.  
+         */
+        template<typename T>
+        concept has_begin = requires(T& obj) {
+            requires std::is_class_v<T>;
+            obj.begin();
+        };
+
+        /**
+         * @brief Works if T class has end function.  
+         */
+        template<typename T>
+        concept has_end = requires(T& obj) {
+            requires std::is_class_v<T>;
+            obj.end();
+        };
+
+        /**
+         * @brief Works if T class has rbegin function.  
+         */
+        template<typename T>
+        concept has_rbegin = requires(T& obj) {
+            requires std::is_class_v<T>;
+            obj.rbegin();
+        };
+
+        /**
+         * @brief Works if T class has rend function.  
+         */
+        template<typename T>
+        concept has_rend = requires(T& obj) {
+            requires std::is_class_v<T>;
+            obj.rend();
+        };
+
+        /**
+         * @brief Works if T class has cbegin function.  
+         */
+        template<typename T>
+        concept has_cbegin = requires(T& obj) {
+            requires std::is_class_v<T>;
+            obj.cbegin();
+        };
+
+        /**
+         * @brief Works if T class has cend function.  
+         */
+        template<typename T>
+        concept has_cend = requires(T& obj) {
+            requires std::is_class_v<T>;
+            obj.cend();
+        };
+
+        /**
+         * @brief Works if T class has crbegin function.  
+         */
+        template<typename T>
+        concept has_crbegin = requires(T& obj) {
+            requires std::is_class_v<T>;
+            obj.crbegin();
+        };
+
+        /**
+         * @brief Works if T class has crend function.  
+         */
+        template<typename T>
+        concept has_crend = requires(T& obj) {
+            requires std::is_class_v<T>;
+            obj.crend();
+        };
+
+        /**
+         * @brief Works if T class has regular iterator.  
+         */
+        template<typename T>
+        concept has_iterator = requires(T& obj) {
+            requires std::is_class_v<T>;
+            requires has_begin<T> && has_end<T>;
+        };
+
+        /**
+         * @brief Works if T class has reverse iterator.  
+         */
+        template<typename T>
+        concept has_reverse_iterator = requires(T& obj) {
+            requires std::is_class_v<T>;
+            requires has_rbegin<T> && has_rend<T>;
+        };
+
+        /**
+         * @brief Works if T class has const iterator.
+         */
+        template<typename T>
+        concept has_const_iterator = requires(T& obj) {
+            requires std::is_class_v<T>;
+            requires has_cbegin<T> && has_cend<T>;
+        };
+
+        /**
+         * @brief Works if T class has const reverse iterator.  
+         */
+        template<typename T>
+        concept has_const_reverse_iterator = requires(T& obj) {
+            requires std::is_class_v<T>;
+            requires has_crbegin<T> && has_crend<T>;
+        };
+
+        /**
+         * @brief Works if T class has regular, reverse, const iterators. 
+         */
+        template<typename T>
+        concept has_full_iterator = requires(T& obj) {
+            requires std::is_class_v<T>;
+            requires has_iterator<T> && has_reverse_iterator<T> && has_const_iterator<T>;
+        };
     } // namespace concepts
 } // namespace xenon
 
