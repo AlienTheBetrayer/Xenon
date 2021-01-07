@@ -1,4 +1,33 @@
 # Xenon
-![enter image description here](https://raw.githubusercontent.com/AlienTheBetrayer/Xenon/main/xenon.png)
+![enter image description here](https://img.shields.io/github/license/AlienTheBetrayer/Xenon?color=blue)
+![xenon-image](https://raw.githubusercontent.com/AlienTheBetrayer/Xenon/main/xenon.png)
+- [About](#about)
+- [Getting started](#getting-started)
+- [All the modules](#all-the-modules)
+- [Roadmap](#roadmap)
+## About
+**Xenon** is a library that has all the stuff you need. It is multi-faceted, it consists of many modules that serve different functionality.
+## Getting started
+Xenon is untested on other compilers except MSVC so it is recommended to use it.
 
-**Xenon** is a library that can be used everywhere in your projects. It consits of many-many modules which consist of different functions, classes, etc.
+Start by cloning or downloading this repository, placing the **xenon** folder in your project and `#include "xenon/xenon.hpp"` or something similar.
+## All the modules
+- Async
+- Concepts
+- Console
+- Files
+- Keys
+- Misc
+- Mouse
+- Process
+- Random
+- Sound
+- String
+- Time
+- Utility
+- Window
+## Roadmap
+- Finish all the modules
+- Make include settings
+- Add new modules and features
+- Optimize everything
