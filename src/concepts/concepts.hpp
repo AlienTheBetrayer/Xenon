@@ -150,9 +150,7 @@ namespace xenon {
          */
         template<typename T, typename T_>
         concept same = all_same<T, T_>;
+    } // namespace concepts
+} // namespace xenon
 
-
-    }
-}
-
-#endif
+#endif // XENON_HG_CONCEPTS_MODULE
