@@ -7,6 +7,7 @@
 
 // Libraries
 #include <type_traits>
+#include <cstdint>
 
 namespace {
     // -- Helper functions. Should not be used by the user. -- \\ 
@@ -27,6 +28,12 @@ namespace xenon {
          */
         template<typename T>
         concept always_satisfied = true;
+
+        /**
+         * @brief Doesn't work with any T.  
+         */
+        template<typename T>
+        concept always_unsatisfied = false;
 
 
 
@@ -173,6 +180,46 @@ namespace xenon {
             t = t_;
         };
 
+        /**
+         * @brief Works if T is equalable to T_.
+         */
+        template<typename T, typename T_>
+        concept equalable = requires(const T& t, const T_& t_) {
+            t == t_;
+        };
+
+        /**
+         * @brief Works if T is biggerable to T_.
+         */
+        template<typename T, typename T_>
+        concept biggerable = requires(const T& t, const T_& t_) {
+            t > t_;
+        };
+
+        /**
+         * @brief Works if T is lessable to T_.
+         */
+        template<typename T, typename T_>
+        concept lessable = requires(const T& t, const T_& t_) {
+            t < t_;
+        };
+
+        /**
+         * @brief Works if T is biggerable or equalsable to T_.
+         */
+        template<typename T, typename T_>
+        concept biggerequalsable = requires(const T& t, const T_& t_) {
+            t >= t_;
+        };
+
+        /**
+         * @brief Works if T is lessable or equalsable to T_.
+         */
+        template<typename T, typename T_>
+        concept lessequalable = requires(const T& t, const T_& t_) {
+            t <= t_;
+        };
+
         // --- ===== --- ===== --- Equality of types --- ===== --- ===== --- \\ 
 
         /**
@@ -194,6 +241,58 @@ namespace xenon {
         concept same = all_same<T, T_>;
 
 
+
+        // --- ===== --- ===== --- Amount of args --- ===== --- ===== --- \\ 
+
+        /**
+         * @brief Works if the amount of args is N.   
+         */
+        template<typename... Ts, uint32_t N>
+        concept equals_n_args = (sizeof...(Ts) == N);
+
+        /**
+         * @brief Works if the amount of args is less than N.  
+         */
+        template<typename... Ts, uint32_t N>
+        concept less_n_args = (sizeof...(Ts) < N);
+        
+        /**
+         * @brief Works if the amount of args is more than N. 
+         */
+        template<typename... Ts, uint32_t N>
+        concept more_n_args = (sizeof...(Ts) > N);
+
+        /**
+         * @brief Works if the amount of args is less or equals than N.   
+         */
+        template<typename... Ts, uint32_t N>
+        concept less_equals_n_args = (sizeof...(Ts) <= N);
+
+        /**
+         * @brief Works if the amount of args is more or equals than N.  
+         */
+        template<typename... Ts, uint32_t N>
+        concept more_equals_n_args = (sizeof...(Ts) >= N);
+
+        /**
+         * @brief Works if the amount of args is not N. 
+         */
+        template<typename... Ts, uint32_t N>
+        concept not_equals_n_args = (sizeof...(Ts) != N);
+
+        /**
+         * @brief Works if the amount of args is even. 
+         */
+        template<typename... Ts>
+        concept even_n_args = (sizeof...(Ts) % 2 == 0);
+
+        /**
+         * @brief Works if the amount of args is odd. 
+         */
+        template<typename... Ts>
+        concept odd_n_args = (sizeof...(Ts) % 2 != 0);
+
+        
 
         // --- ===== --- ===== --- Iterators --- ===== --- ===== --- \\ 
 
