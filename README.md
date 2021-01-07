@@ -1,5 +1,4 @@
-# Xenon
-![enter image description here](https://img.shields.io/github/license/AlienTheBetrayer/Xenon?color=blue)
+# Xenon ![enter image description here](https://img.shields.io/github/license/AlienTheBetrayer/Xenon?color=blue)
 ![xenon-image](https://raw.githubusercontent.com/AlienTheBetrayer/Xenon/main/xenon.png)
 - [About](#about)
 - [Getting started](#getting-started)
