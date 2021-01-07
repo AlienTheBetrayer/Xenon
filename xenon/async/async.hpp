@@ -48,7 +48,7 @@ namespace xenon {
 			std::thread([=, &args...]() {
 				if(timeout)
 					std::this_thread::sleep_for(std::chrono::milliseconds(timeout));
-				work_func(callback_func(args...));
+				work_func(callback_func(std::forward<Args>(args)...));
 			}).detach();
 		}
     } // namespace async

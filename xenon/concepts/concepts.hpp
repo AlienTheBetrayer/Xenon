@@ -71,7 +71,7 @@ namespace xenon {
          */
         template<typename F, typename... Args>
         concept callable = requires(const F&& func, Args&&... args) {
-            requires function<F>;
+            requires function<F>; 
             func(std::forward<Args>(args)...);
         };
 
