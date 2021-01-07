@@ -6,6 +6,9 @@
 #ifndef XENON_HG_LIB
 #define XENON_HG_LIB
 
+// Library's dependencies
+#include "./macros.hpp"
+
 // All the namespaces declarations so we have the @brief on each of them.
 
 /**
@@ -19,21 +22,23 @@ namespace xenon {
 
     } // namespace async
 
+#ifdef XENON_M_CPP20GRT
     /**
      * @brief Module that has various concepts and tools that can be used in your regular code instead of SFINAE.
      */
     namespace concepts {
 
     } // namespace concepts
+#endif // XENON_M_CPP20GRT
 
-#ifdef _WIN32
+#ifdef XENON_M_WIN
     /**
      * @brief Module that can do graphics in console, such as colors and more. Windows-only.
      */
     namespace console {
         
     } // namespace console
-#endif // _WIN32
+#endif // XENON_M_WIN
 
     /**
      * @brief Module that helps with reading and writing to files.
@@ -42,14 +47,14 @@ namespace xenon {
 
     } // namespace files
 
-#ifdef _WIN32
+#ifdef XENON_M_WIN
     /**
      * @brief Module that eases pressing of keys. Windows-only.
      */
     namespace keys {
 
     } // namespace keys
-#endif // _WIN32
+#endif // XENON_M_WIN
 
     /**
      * @brief Module that has other stuff that no other module has.
@@ -58,23 +63,23 @@ namespace xenon {
 
     } // namespace misc
 
-#ifdef _WIN32
+#ifdef XENON_M_WIN
     /**
      * @brief Module that eases moving mouse. Windows-only.
      */
     namespace mouse {
 
     } // namespace mouse
-#endif // _WIN32
+#endif // XENON_M_WIN
 
-#ifdef _WIN32
+#ifdef XENON_M_WIN
     /**
      * @brief Module that helps with managing processes. Windows-only.
      */
     namespace process {
 
     } // namespace process
-#endif // _WIN32
+#endif // XENON_M_WIN
 
     /**
      * @brief Module that is able to generate random numbers and more.
@@ -83,14 +88,14 @@ namespace xenon {
 
     } // namespace random
 
-#ifdef _WIN32
+#ifdef XENON_M_WIN
     /**
      * @brief Module that is able to play sounds. Windows-only.
      */
     namespace sound {
 
     } // namespace sound
-#endif // _WIN32
+#endif // XENON_M_WIN
 
     /**
      * @brief Module that helps transforming and managing strings.
@@ -113,18 +118,25 @@ namespace xenon {
 
     } // namespace utility
     
-#ifdef _WIN32
+#ifdef XENON_M_WIN
     /**
      * @brief Module that helps with managing windows. Windows-only.
      */
     namespace window {
 
     } // namespace window
-#endif // _WIN32
+#endif // XENON_M_WIN
 } // namespace xenon
 
 // All the includes
-#include "async/async.hpp"
+// C++20 only modules
+#ifdef XENON_M_CPP20GRT
 #include "concepts/concepts.hpp"
+#endif // XENON_M_CPP20GRT
+
+// C++17 only modules
+
+// All the other modules
+#include "async/async.hpp"
 
 #endif // XENON_HG_LIB
