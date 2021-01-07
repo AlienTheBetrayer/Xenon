@@ -90,6 +90,36 @@ namespace xenon {
         template<typename T>
         concept array = std::is_array_v<T>;
 
+        /**
+         * @brief Works if T is a lvalue reference.  
+         */
+        template<typename T>
+        concept lvalue_ref = std::is_lvalue_reference_v<T>;
+
+        /**
+         * @brief Works if T is a lvalue reference.  
+         */
+        template<typename T>
+        concept clvalue_ref = std::is_lvalue_reference_v<T> && std::is_const_v<T>;
+
+        /**
+         * @brief Works if T is a rvalue reference.  
+         */
+        template<typename T>
+        concept rvalue_ref = std::is_rvalue_reference_v<T>;
+
+        /**
+         * @brief Works if T is some reference.  
+         */
+        template<typename T>
+        concept ref = lvalue_ref<T> || rvalue<T> || clvalue_ref<T>;
+
+        /**
+         * @brief Works if T is volatile.  
+         */
+        template<typename T>
+        concept volatile_ = std::is_volatile_v<T>;
+
 
 
         // --- ===== --- ===== --- Operators --- ===== --- ===== --- \\ 
@@ -142,22 +172,6 @@ namespace xenon {
         concept settable = requires(T& t, const T_& t_) {
             t = t_;
         };
-
-
-
-        // --- ===== --- ===== --- References --- ===== --- ===== --- \\ 
-
-        /**
-         * @brief Works if T is a lvalue reference.  
-         */
-        template<typename T>
-        concept lvalue_ref = std::is_lvalue_reference_v<T>;
-
-        /**
-         * @brief Works if T is a rvalue reference.  
-         */
-        template<typename T>
-        concept rvalue_ref = std::is_rvalue_reference_v<T>;
 
         // --- ===== --- ===== --- Equality of types --- ===== --- ===== --- \\ 
 
