@@ -410,7 +410,7 @@ namespace xenon {
         template<typename T>
         concept has_full_iterator = requires(T& obj) {
             requires std::is_class_v<T>;
-            requires has_iterator<T> && has_reverse_iterator<T> && has_const_iterator<T>;
+            requires has_iterator<T> && has_reverse_iterator<T> && has_const_iterator<T> && has_const_reverse_iterator<T>;
         };
     } // namespace concepts
 } // namespace xenon
