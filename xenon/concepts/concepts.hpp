@@ -67,7 +67,7 @@ namespace xenon {
          * @brief Works if T is either floating point or integral.  
          */
         template<typename T>
-        concept arithmetic = floating_point<T> && integral<T>;
+        concept arithmetic = floating_point<T> || integral<T>;
 
         /**
          * @brief Works if T is a function.  
