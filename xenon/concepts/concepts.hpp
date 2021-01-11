@@ -190,7 +190,7 @@ namespace xenon {
          * @brief Works if T is equalable to T_.
          */
         template<typename T, typename T_>
-        concept equalable = requires(const T& t, const T_& t_) {
+        concept equals_able = requires(const T& t, const T_& t_) {
             t == t_;
         };
 
@@ -198,7 +198,7 @@ namespace xenon {
          * @brief Works if T is biggerable to T_.
          */
         template<typename T, typename T_>
-        concept biggerable = requires(const T& t, const T_& t_) {
+        concept bigger_able = requires(const T& t, const T_& t_) {
             t > t_;
         };
 
@@ -206,7 +206,7 @@ namespace xenon {
          * @brief Works if T is lessable to T_.
          */
         template<typename T, typename T_>
-        concept lessable = requires(const T& t, const T_& t_) {
+        concept less_able = requires(const T& t, const T_& t_) {
             t < t_;
         };
 
@@ -214,7 +214,7 @@ namespace xenon {
          * @brief Works if T is biggerable or equalsable to T_.
          */
         template<typename T, typename T_>
-        concept biggerequalsable = requires(const T& t, const T_& t_) {
+        concept bigger_equals_able = requires(const T& t, const T_& t_) {
             t >= t_;
         };
 
@@ -222,7 +222,7 @@ namespace xenon {
          * @brief Works if T is lessable or equalsable to T_.
          */
         template<typename T, typename T_>
-        concept lessequalable = requires(const T& t, const T_& t_) {
+        concept less_equals_able = requires(const T& t, const T_& t_) {
             t <= t_;
         };
 
