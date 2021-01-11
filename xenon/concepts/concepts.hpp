@@ -74,6 +74,12 @@ namespace xenon {
          */
         template<typename T>
         concept function = std::is_function_v<T>;
+
+        /**
+         * @brief Works if T is void.  
+         */
+        template<typename T>
+        concept void_ = std::is_void_v<T>;
         
 
 

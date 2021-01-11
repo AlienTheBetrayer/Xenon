@@ -17,11 +17,6 @@
 #if defined(_MSVC_LANG) && _MSVC_LANG > 201703L || __cplusplus >= 201703L
 #define XENON_M_CPP20GRT
 #endif // defined(_MSVC_LANG) && _MSVC_LANG > 201703L || __cplusplus >= 201703L
-
-// C++ version is bigger or equals to 17
-#if defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || __cplusplus >= 201703L
-#define XENON_M_CPP17GRT
-#endif // defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || __cplusplus >= 201703L
 #endif // _WIN32
 
 #endif // XENON_HG_MACROS

@@ -11,6 +11,7 @@
 #include <functional>
 #include <iostream>
 #include <utility>
+#include "../concepts/concepts.hpp"
 
 namespace xenon {
     namespace async {
@@ -44,11 +45,30 @@ namespace xenon {
 		* @retval None
 		*/
 		template<typename Ret, typename... Args>
+			requires !xenon::concepts::void_<Ret>
 		inline void then(const std::function<Ret(Args...)>& callback_func, const std::function<void(Ret)>& work_func, Args&&... args, const uint32_t timeout = 0) noexcept {
 			std::thread([=, &args...]() {
 				[[unlikely]] if(timeout)
 					std::this_thread::sleep_for(std::chrono::milliseconds(timeout));
 				work_func(callback_func(std::forward<Args>(args)...));
+			}).detach();
+		}
+
+		/**
+		* @brief Calls work_func asynchronously with results from callback_func, which gets called asynchronously.
+		* @param callback_func: The function which returns something
+		* @param work_func: The function which accepts that something that callback_func returns
+		* @param args: All the arguments to the callback_func
+		* @param timeout: After how many milliseconds to run the callback_func
+		* @retval None
+		*/
+		template<typename Ret>
+			requires !xenon::concepts::void_<Ret>
+		inline void then(const std::function<Ret(void)>& callback_func, const std::function<void(Ret)>& work_func, const uint32_t timeout = 0) noexcept {
+			std::thread([=]() {
+				[[unlikely]] if(timeout)
+					std::this_thread::sleep_for(std::chrono::milliseconds(timeout));
+				work_func(callback_func());
 			}).detach();
 		}
     } // namespace async
