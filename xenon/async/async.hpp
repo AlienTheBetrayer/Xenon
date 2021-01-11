@@ -58,7 +58,6 @@ namespace xenon {
 		* @brief Calls work_func asynchronously with results from callback_func, which gets called asynchronously.
 		* @param callback_func: The function which returns something
 		* @param work_func: The function which accepts that something that callback_func returns
-		* @param args: All the arguments to the callback_func
 		* @param timeout: After how many milliseconds to run the callback_func
 		* @retval None
 		*/
