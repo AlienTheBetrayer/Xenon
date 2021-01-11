@@ -132,6 +132,7 @@ namespace xenon {
 // All the includes
 #include "concepts/concepts.hpp"
 #include "async/async.hpp"
+#include "utilities/utilities.hpp"
 
 #else // XENON_M_CPP17GRT
 #error xenon requires at least cpp20
