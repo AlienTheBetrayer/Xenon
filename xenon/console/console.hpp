@@ -23,8 +23,10 @@
 namespace xenon {
     namespace console {
         // Get functions
+        
         [[nodiscard]] HANDLE get_handle(const DWORD type = STD_OUTPUT_HANDLE) noexcept;
         [[nodiscard]] HWND get_window(void) noexcept; 
+
         // Get console's properties functions
 
         [[nodiscard]] xenon::utilities::Vector2<uint32_t> get_window_size(void) noexcept;
