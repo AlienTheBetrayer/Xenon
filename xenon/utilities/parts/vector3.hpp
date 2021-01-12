@@ -28,17 +28,17 @@ namespace xenon {
 
             /**
              * @brief Adds two vectors together.
-             * @param vec: Another vector.
-             * @retval New vector.
+             * @param vec: Another vector
+             * @retval New vector
              */
             [[nodiscard]] Vector3 operator+(const Vector3& vec) noexcept {
                 return Vector3{ x + vec.x, y + vec.y, z + vec.z };
             }
 
             /**
-             * @brief Subtracts two vectors together.
-             * @param vec: Another vector.
-             * @retval New vector.
+             * @brief Subtracts two vectors.
+             * @param vec: Another vector
+             * @retval New vector
              */
             [[nodiscard]] Vector3 operator-(const Vector3& vec) noexcept {
                 return Vector3{ x - vec.x, y - vec.y, z - vec.z };
@@ -46,17 +46,17 @@ namespace xenon {
 
              /**
              * @brief Multiplies two vectors together.
-             * @param vec: Another vector.
-             * @retval New vector.
+             * @param vec: Another vector
+             * @retval New vector
              */
             [[nodiscard]] Vector3 operator*(const Vector3& vec) noexcept {
                 return Vector3{ x * vec.x, y * vec.y, z * vec.z };
             }
 
             /**
-             * @brief Divides two vectors together.
-             * @param vec: Another vector.
-             * @retval New vector.
+             * @brief Divides two vectors.
+             * @param vec: Another vector
+             * @retval New vector
              */
             [[nodiscard]] Vector3 operator/(const Vector3& vec) noexcept {
                 return Vector3{ x / vec.x, y / vec.y, z * vec.z };
