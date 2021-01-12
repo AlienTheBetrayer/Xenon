@@ -66,7 +66,7 @@ namespace xenon {
                 return os;
             }
         };
-    } // namespace utility
+    } // namespace utilities
 } // namespace xenon
 
 #endif // X ENON_HG_UTILITIES_VECTOR2
