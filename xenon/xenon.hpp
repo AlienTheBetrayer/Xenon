@@ -134,6 +134,11 @@ namespace xenon {
 #include "async/async.hpp"
 #include "utilities/utilities.hpp"
 
+// Windows-only includes
+#ifdef XENON_M_WIN
+#include "console/console.hpp"
+#endif
+
 #else // XENON_M_CPP17GRT
 #error xenon requires at least cpp20
 #endif // XENON_M_CPP17GRT

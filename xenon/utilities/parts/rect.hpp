@@ -20,7 +20,7 @@ namespace xenon {
             T right;
             T top;
             T bottom;
-
+             
             /**
              * @brief Compares two rectangles.
              * @param rect: Another rectangle 
