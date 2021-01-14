@@ -34,6 +34,7 @@ namespace xenon {
 
         /**
          * @brief Gets the std handle of the console.
+         * @note 
          * @param  type: The type of the std handle
          * @retval The handle
          */
@@ -44,6 +45,7 @@ namespace xenon {
 
         /**
          * @brief Gets the console's window.
+         * @note 
          * @retval The window
          */
         [[nodiscard]] HWND get_window(void) noexcept {
@@ -57,6 +59,7 @@ namespace xenon {
 
         /**
          * @brief Gets the console's buffer size. 
+         * @note 
          * @retval Buffer size vector
          */
         [[nodiscard]] xenon::utilities::Vector2<uint32_t> get_buffer_size(void) noexcept {
@@ -67,6 +70,7 @@ namespace xenon {
 
         /**
          * @brief Gets the console window bounds.
+         * @note 
          * @retval A console's window bounds 
          */
         [[nodiscard]] xenon::utilities::Rect<uint32_t> get_window_bounds(void) noexcept {
@@ -77,6 +81,7 @@ namespace xenon {
 
         /**
          * @brief Gets the console's window size.
+         * @note 
          * @retval Window size vector
          */
         [[nodiscard]] xenon::utilities::Vector2<uint32_t> get_window_size(void) noexcept {
@@ -90,6 +95,7 @@ namespace xenon {
 
         /**
          * @brief Sets the console's window size
+         * @note 
          * @param  size: New size
          * @retval None
          */
@@ -102,6 +108,7 @@ namespace xenon {
 
         /**
          * @brief Sets the new buffer size for the console.
+         * @note 
          * @param size: New size of the console's window buffer
          * @retval None
          */
@@ -112,6 +119,7 @@ namespace xenon {
 
         /**
          * @brief Sets the new window bounds.
+         * @note 
          * @param bounds: New bounds of the console's window
          * @retval None
          */
@@ -121,6 +129,7 @@ namespace xenon {
 
         /**
          * @brief Puts the console's window at the center of your screen.
+         * @note 
          * @retval None
          */
         void center(void) noexcept {
@@ -132,6 +141,7 @@ namespace xenon {
 
         /**
          * @brief Sets the console's window title to a specified string.
+         * @note 
          * @param  new_title: A new title for the console's window 
          * @retval None
          */
@@ -140,7 +150,8 @@ namespace xenon {
         }
 
         /**
-         * @brief Gets the console's window title and returns it. 
+         * @brief Gets the console's window title and returns it.
+         * @note 
          * @retval Console's window title string.
          */
         [[nodiscard]] std::string get_window_title(void) noexcept {
@@ -166,6 +177,9 @@ namespace xenon {
 
         // --- ===== --- ===== --- Buffer --- ===== --- ===== --- \\ 
         
+        /**
+         * @brief All the colors that can be used.  
+         */
         inline std::unordered_map<std::string, uint32_t> colors = {
             {"black", 0},
 			{"dark_blue", 1},
@@ -185,38 +199,93 @@ namespace xenon {
 			{"white", 15}
 		};
 
+        /**
+         * @brief Goes to specific coordinates.
+         * @note
+         * @param  axis: Coordinates
+         * @retval None
+         */
         void axis_goto(const xenon::utilities::Vector2<int32_t>& axis) noexcept {
             SetConsoleCursorPosition(get_handle(), { static_cast<int16_t>(axis.x), static_cast<int16_t>(axis.y) });
         }
 
+        /**
+         * @brief Sets the current color to the specified.
+         * @note   
+         * @param  color: Color
+         * @retval None
+         */
         void set_color(const uint32_t color) noexcept {
             SetConsoleTextAttribute(get_handle(), static_cast<uint16_t>(color));
         }
 
+        /**
+         * @brief  Sets the current color to the specified.
+         * @note   
+         * @param  color: Color
+         * @retval None
+         */
         void set_color(const std::string& color) noexcept {
             set_color(colors[color]);
         }
 
+        /**
+         * @brief Sets the current color to the specified and prints out text.
+         * @note   
+         * @param  text: Text
+         * @param  color: Color
+         * @retval None
+         */
         void color_print(const std::string& text, const uint32_t color) noexcept {
             set_color(color);
             printf(text.c_str());
             set_color("light_gray");
         }
 
+        /**
+         * @brief Sets the current color to the specified and prints out text.
+         * @note   
+         * @param  text: Text
+         * @param  color: Color
+         * @retval None
+         */
         void color_print(const std::string& text, const std::string& color) noexcept {
             color_print(text, colors[color]);
         }
 
+        /**
+         * @brief Goes to the specified coordinates and prints out text.
+         * @note   
+         * @param  text: Text
+         * @param  axis: Coordinates
+         * @retval None
+         */
         void axis_print(const std::string& text, const xenon::utilities::Vector2<int32_t>& axis) noexcept {
             axis_goto(axis);
             printf(text.c_str());
         }
 
+        /**
+         * @brief Goes to the specified coordinates, sets current color to the specified and prints out text.
+         * @note   
+         * @param  text: Text
+         * @param  color: Color
+         * @param  axis: Coordinates
+         * @retval None
+         */
         void axis_color_print(const std::string& text, const uint32_t color, const xenon::utilities::Vector2<int32_t>& axis) noexcept {
             axis_goto(axis);
             color_print(text, color);
         }
 
+        /**
+         * @brief Goes to the specified coordinates, sets current color to the specified and prints out text. 
+         * @note   
+         * @param  text: 
+         * @param  color: 
+         * @param  axis: 
+         * @retval None
+         */
         void axis_color_print(const std::string& text, const std::string& color, const xenon::utilities::Vector2<int32_t>& axis) noexcept {
             axis_color_print(text, colors[color], axis);
         }
