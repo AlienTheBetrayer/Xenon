@@ -20,6 +20,7 @@ namespace xenon {
 		* @brief Runs a function in the separate thread with specified arguments and return type.
 		* @param func: The function itself
 		* @param args: All the args that the function accepts
+		* @note
 		* @retval None
 		*/
 		template<typename Ret = void, typename... Args>
@@ -30,6 +31,7 @@ namespace xenon {
 		/**
 		* @brief Runs a function in a separate thread with a specified return type without any arguments.
 		* @param func: The function itself
+		* @note
 		* @retval None
 		*/
         template<typename Ret = void>
@@ -43,6 +45,7 @@ namespace xenon {
 		* @param work_func: The function which accepts that something that callback_func returns
 		* @param args: All the arguments to the callback_func
 		* @param timeout: After how many milliseconds to run the callback_func
+		* @note
 		* @retval None
 		*/
 		template<typename Ret, typename... Args>
@@ -60,6 +63,7 @@ namespace xenon {
 		* @param callback_func: The function which returns something
 		* @param work_func: The function which accepts that something that callback_func returns
 		* @param timeout: After how many milliseconds to run the callback_func
+		* @note
 		* @retval None
 		*/
 		template<typename Ret>
