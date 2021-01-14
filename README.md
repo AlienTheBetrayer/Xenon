@@ -1,3 +1,4 @@
+
 # Xenon ![enter image description here](https://img.shields.io/github/license/AlienTheBetrayer/Xenon?color=blue)
 ![xenon-image](https://raw.githubusercontent.com/AlienTheBetrayer/Xenon/main/xenon.png)
 - [About](#about)
@@ -11,20 +12,21 @@ Xenon is untested on other compilers except MSVC so it is recommended to use it.
 
 Start by cloning or downloading this repository, placing the **xenon** folder in your project and do `#include "xenon/xenon.hpp"` or something similar.
 ## All the modules
-- Async
-- Concepts
-- Console
-- Files
-- Keys
-- Misc
-- Mouse
-- Process
-- Random
-- Sound
-- String
-- Time
-- Utility
-- Window
+Checkmark means that the module is either done or a large part of work has been already made.
+- [x] Async
+- [x] Concepts
+- [x] Console
+- [ ] Files
+- [ ] Keys
+- [ ] Misc
+- [ ] Mouse
+- [ ] Process
+- [ ] Random
+- [ ] Sound
+- [ ] String
+- [ ] Time
+- [x] Utility
+- [ ] Window
 ## Roadmap
 - Finish all the modules
 - Make include settings
