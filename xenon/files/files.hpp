@@ -35,7 +35,7 @@ namespace xenon {
          * @param  path: The path for the specified file.  
          * @retval Number of lines
          */
-        uint64_t count_lines(const std::string& path) noexcept {
+        [[nodiscard]] uint64_t count_lines(const std::string& path) noexcept {
             if(std::ifstream file(path); file.good() && file.is_open()) {
                 file.unsetf(std::ios_base::skipws);
                 return static_cast<uint64_t>(std::count(std::istream_iterator<char>(file), std::istream_iterator<char>(), '\n'));
