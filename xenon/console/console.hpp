@@ -169,7 +169,6 @@ namespace xenon {
             POINT m_point;
             GetWindowRect(get_window(), &c_rect);
             GetCursorPos(&m_point);
-            
             return m_point.x >= c_rect.left && m_point.x <= c_rect.right && m_point.y >= c_rect.top && m_point.y <= c_rect.bottom;
         }
 
