@@ -18,12 +18,12 @@ namespace xenon {
          * @retval 
          */
         [[nodiscard]] std::string read_file(const std::string& path) noexcept {
-            if(std::ifstream file(path); file.good() && file.is_open()) {
+            if(std::ifstream file(path); file.good() && file.is_open()) [[likely]] {
                 std::string text;
                 for(std::string line; std::getline(file, line);)
                     text += line;
                 return text;
-            } else
+            } else [[unlikely]]
                 return "";
         }
 
@@ -36,11 +36,11 @@ namespace xenon {
          * @retval Number of lines
          */
         [[nodiscard]] uint64_t count_lines(const std::string& path) noexcept {
-            if(std::ifstream file(path); file.good() && file.is_open()) {
+            if(std::ifstream file(path); file.good() && file.is_open()) [[likely]] {
                 file.unsetf(std::ios_base::skipws);
                 return static_cast<uint64_t>(std::count(std::istream_iterator<char>(file), std::istream_iterator<char>(), '\n'));
             }
-            else
+            else [[unlikely]]
                 return fileopen_err;
         }
     } // namespace files

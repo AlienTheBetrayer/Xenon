@@ -70,7 +70,7 @@ namespace xenon {
 			requires !xenon::concepts::void_<Ret>
 		inline void then(const std::function<Ret(void)>& callback_func, const std::function<void(Ret)>& work_func, const uint32_t timeout = 0) noexcept {
 			std::thread([=]() {
-				[[unlikely]] if(timeout)
+				if(timeout) [[unlikely]]
 					std::this_thread::sleep_for(std::chrono::milliseconds(timeout));
 				work_func(callback_func());
 			}).detach();
