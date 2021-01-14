@@ -23,12 +23,14 @@ namespace xenon {
              
             /**
              * @brief Compares two rectangles.
+             * @note 
              * @param rect: Another rectangle 
              */
             [[nodiscard]] auto operator<=>(const Rect& rect) const noexcept = default;
 
             /**
              * @brief Adds two rectangles together.
+             * @note 
              * @param rect: Another rectangle
              * @retval New rectangle
              */
@@ -38,6 +40,7 @@ namespace xenon {
 
             /**
              * @brief Subtracts two rectangles.
+             * @note 
              * @param rect: Another rectangle
              * @retval New rectangle
              */
@@ -47,6 +50,7 @@ namespace xenon {
 
              /**
              * @brief Multiplies two rectangle together.
+             * @note 
              * @param rect: Another rectangle
              * @retval New rectangle
              */
@@ -56,6 +60,7 @@ namespace xenon {
 
             /**
              * @brief Divides two rectangles.
+             * @note 
              * @param rect: Another rectangle
              * @retval New rectangle
              */

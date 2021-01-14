@@ -21,12 +21,14 @@ namespace xenon {
 
             /**
              * @brief Compares two vectors.
+             * @note 
              * @param vec: Another vector 
              */
             [[nodiscard]] auto operator<=>(const Vector2& vec) const noexcept = default;
 
             /**
              * @brief Adds two vectors together.
+             * @note 
              * @param vec: Another vector
              * @retval New vector
              */
@@ -36,6 +38,7 @@ namespace xenon {
 
             /**
              * @brief Subtracts two vectors.
+             * @note 
              * @param vec: Another vector
              * @retval New vector
              */
@@ -45,6 +48,7 @@ namespace xenon {
 
              /**
              * @brief Multiplies two vectors together.
+             * @note 
              * @param vec: Another vector
              * @retval New vector
              */
@@ -54,6 +58,7 @@ namespace xenon {
 
             /**
              * @brief Divides two vectors.
+             * @note 
              * @param vec: Another vector
              * @retval New vector
              */
