@@ -9,13 +9,14 @@
 #include <fstream>
 #include <string>
 #include <optional>
+#include <vector>
 
 namespace xenon {
     namespace files {
         /**
          * @brief Reads the file and returns a string, containing all the file's data.
          * @note   
-         * @param  path: The path for the specified file. 
+         * @param  path: The path for the specified file 
          * @retval 
          */
         [[nodiscard]] std::optional<std::string> read_file(const std::string& path) noexcept {
@@ -24,15 +25,28 @@ namespace xenon {
                 for(std::string line; std::getline(file, line);)
                     text += line;
                 file.close();
-                return text;
+                return std::optional<std::string>(text);
             } else [[unlikely]]
-                return {};
+                return std::nullopt;
+        }
+
+        [[nodiscard]] std::optional<std::vector<std::string>> read_file_lines(const std::string& path, const uint64_t estimated_lines_quantity = -1) noexcept {
+            if(std::ifstream file(path); file.good() && file.is_open()) [[likely]] {
+                std::vector<std::string> lines = {};
+                if(estimated_lines_quantity != static_cast<uint64_t>(-1))
+                    lines.reserve(estimated_lines_quantity);  
+                for(std::string line; std::getline(file, line);)
+                    lines.emplace_back(line);
+                file.close();
+                return lines;
+            } else [[unlikely]]
+                return std::nullopt;
         }
 
         /**
          * @brief Counts the number of lines in a file.
          * @note   
-         * @param  path: The path for the specified file.  
+         * @param  path: The path for the specified file  
          * @retval Number of lines
          */
         [[nodiscard]] std::optional<uint64_t> count_lines(const std::string& path) noexcept {
@@ -43,9 +57,16 @@ namespace xenon {
                 return lines;
             }
             else [[unlikely]]
-                return {};
+                return std::nullopt;
         }
 
+        /**
+         * @brief Writes a new content to the specified file. 
+         * @note   
+         * @param  path: The path for the specified file
+         * @param  content: The content that will be written to that file
+         * @retval Status of the opened file. True if opened correctly. 
+         */
         bool write_file(const std::string& path, const std::string& content) noexcept {
             if(std::ofstream file(path); file.good() && file.is_open()) [[likely]] {
                 file << content;
@@ -54,6 +75,25 @@ namespace xenon {
             } else [[unlikely]]
                 return false;
         }
+
+        /**
+         * @brief Writes a new content line by line from content vector to the specified file.
+         * @note   
+         * @param  path: The path for the specified file
+         * @param  content: The content that will be written to that file
+         * @retval Status of the opened file. True if opened correctly. 
+         */
+        bool write_file(const std::string& path, const std::vector<std::string>& content) noexcept {
+            if(std::ofstream file(path); file.good() && file.is_open()) [[likely]] {
+                for(const std::string& line : content)
+                    file << line << "\n";
+                file.close();
+                return true;
+            } else [[unlikely]]
+                return false;
+        }
+
+
     } // namespace files
 } // namespace xenon
 
