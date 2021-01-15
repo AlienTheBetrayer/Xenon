@@ -30,10 +30,17 @@ namespace xenon {
                 return std::nullopt;
         }
 
+        /**
+         * @brief Reads the file line by line and returns a vector, which contains all the lines.
+         * @note   
+         * @param  path: The path for the specified file
+         * @param  estimated_lines_quantity: An approximated amount of lines that a file has
+         * @retval All the lines of the file.
+         */
         [[nodiscard]] std::optional<std::vector<std::string>> read_file_lines(const std::string& path, const uint64_t estimated_lines_quantity = -1) noexcept {
             if(std::ifstream file(path); file.good() && file.is_open()) [[likely]] {
                 std::vector<std::string> lines = {};
-                if(estimated_lines_quantity != static_cast<uint64_t>(-1))
+                if(estimated_lines_quantity != static_cast<uint64_t>(-1)) [[unlikely]]
                     lines.reserve(estimated_lines_quantity);  
                 for(std::string line; std::getline(file, line);)
                     lines.emplace_back(line);
