@@ -8,40 +8,51 @@
 // Libraries
 #include <fstream>
 #include <string>
+#include <optional>
 
 namespace xenon {
     namespace files {
         /**
-         * @brief Reads the file and returns a string, containing all the file's data. Returns an empty string if it couldn't open the file.
+         * @brief Reads the file and returns a string, containing all the file's data.
          * @note   
          * @param  path: The path for the specified file. 
          * @retval 
          */
-        [[nodiscard]] std::string read_file(const std::string& path) noexcept {
+        [[nodiscard]] std::optional<std::string> read_file(const std::string& path) noexcept {
             if(std::ifstream file(path); file.good() && file.is_open()) [[likely]] {
                 std::string text;
                 for(std::string line; std::getline(file, line);)
                     text += line;
+                file.close();
                 return text;
             } else [[unlikely]]
-                return "";
+                return {};
         }
 
-        constexpr inline const uint64_t fileopen_err = -1;
-
         /**
-         * @brief Counts the number of lines in a file. Returns fileopen_err if it couldn't open the file.
+         * @brief Counts the number of lines in a file.
          * @note   
          * @param  path: The path for the specified file.  
          * @retval Number of lines
          */
-        [[nodiscard]] uint64_t count_lines(const std::string& path) noexcept {
+        [[nodiscard]] std::optional<uint64_t> count_lines(const std::string& path) noexcept {
             if(std::ifstream file(path); file.good() && file.is_open()) [[likely]] {
                 file.unsetf(std::ios_base::skipws);
-                return static_cast<uint64_t>(std::count(std::istream_iterator<char>(file), std::istream_iterator<char>(), '\n'));
+                const uint64_t lines = static_cast<uint64_t>(std::count(std::istream_iterator<char>(file), std::istream_iterator<char>(), '\n')); 
+                file.close();
+                return lines;
             }
             else [[unlikely]]
-                return fileopen_err;
+                return {};
+        }
+
+        bool write_file(const std::string& path, const std::string& content) noexcept {
+            if(std::ofstream file(path); file.good() && file.is_open()) [[likely]] {
+                file << content;
+                file.close();
+                return true;
+            } else [[unlikely]]
+                return false;
         }
     } // namespace files
 } // namespace xenon
