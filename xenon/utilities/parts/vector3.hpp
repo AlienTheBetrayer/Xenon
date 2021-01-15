@@ -64,7 +64,7 @@ namespace xenon {
              * @retval New vector
              */
             [[nodiscard]] Vector3 operator/(const Vector3& vec) noexcept {
-                return Vector3{ x / vec.x, y / vec.y, z * vec.z };
+                return Vector3{ x / vec.x, y / vec.y, z / vec.z };
             }
 
             friend std::ostream& operator<<(std::ostream& os, const Vector3& vec) noexcept {

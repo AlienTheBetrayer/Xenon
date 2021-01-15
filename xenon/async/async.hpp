@@ -50,10 +50,8 @@ namespace xenon {
 		*/
 		template<typename Ret, typename... Args>
 			requires !xenon::concepts::void_<Ret>
-		inline void then(const std::function<Ret(Args...)>& callback_func, const std::function<void(Ret)>& work_func, Args&&... args, const uint32_t timeout = 0) noexcept {
+		inline void then(const std::function<Ret(Args...)>& callback_func, const std::function<void(Ret)>& work_func, Args&&... args) noexcept {
 			std::thread([=, &args...]() {
-				if(timeout) [[unlikely]]
-					std::this_thread::sleep_for(std::chrono::milliseconds(timeout));
 				work_func(callback_func(std::forward<Args>(args)...));
 			}).detach();
 		}
@@ -68,10 +66,8 @@ namespace xenon {
 		*/
 		template<typename Ret>
 			requires !xenon::concepts::void_<Ret>
-		inline void then(const std::function<Ret(void)>& callback_func, const std::function<void(Ret)>& work_func, const uint32_t timeout = 0) noexcept {
+		inline void then(const std::function<Ret(void)>& callback_func, const std::function<void(Ret)>& work_func) noexcept {
 			std::thread([=]() {
-				if(timeout) [[unlikely]]
-					std::this_thread::sleep_for(std::chrono::milliseconds(timeout));
 				work_func(callback_func());
 			}).detach();
 		}
