@@ -109,7 +109,19 @@ namespace xenon {
                 return false;
         }
 
-
+        /**
+         * @brief Clears the file.
+         * @note   
+         * @param  path: The path for the specified file. 
+         * @retval Status of the opened file. True if opened correctly. 
+         */
+        bool clear_file(const std::string& path) noexcept {
+            if(std::ofstream file(path); file.good() && file.is_open()) [[likely]] {
+                file.close();
+                return true;
+            } else [[unlikely]]
+                return false;
+        }
     } // namespace files
 } // namespace xenon
 
