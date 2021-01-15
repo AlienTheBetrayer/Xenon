@@ -21,7 +21,7 @@ namespace {
 
 namespace xenon {
     namespace concepts {
-        // --- ===== --- ===== --- Other --- ===== --- ===== --- \\ 
+#pragma region Other
         /**
          * @brief Works with any T.  
          */
@@ -33,10 +33,9 @@ namespace xenon {
          */
         template<typename T>
         concept always_unsatisfied = false;
+#pragma endregion Other
 
-
-        // --- ===== --- ===== --- Types --- ===== --- ===== --- \\ 
-
+#pragma region Types
         /**
          * @brief Works if T is integral.  
          */
@@ -78,11 +77,9 @@ namespace xenon {
          */
         template<typename T>
         concept void_ = std::is_void_v<T>;
-        
+#pragma endregion Types
 
-
-        // --- ===== --- ===== --- Modifiers --- ===== --- ===== --- \\ 
-
+#pragma region Modifiers
         /**
          * @brief Works if T is const.
          */
@@ -130,11 +127,9 @@ namespace xenon {
          */
         template<typename T>
         concept volatile_ = std::is_volatile_v<T>;
+#pragma endregion Modifiers
 
-
-
-        // --- ===== --- ===== --- Operators --- ===== --- ===== --- \\ 
-
+#pragma region Operators
         /**
          * @brief Works if T is callable with Args. 
          */
@@ -223,9 +218,9 @@ namespace xenon {
         concept less_equals_able = requires(const T& t, const T_& t_) {
             t <= t_;
         };
+#pragma endregion Operators
 
-        // --- ===== --- ===== --- Equality of types --- ===== --- ===== --- \\ 
-
+#pragma region Equality_of_types
         /**
          * @brief Works if all Ts are the same types.  
          */
@@ -243,11 +238,9 @@ namespace xenon {
          */
         template<typename T, typename T_>
         concept same = all_same<T, T_>;
+#pragma endregion Equality_of_types
 
-
-
-        // --- ===== --- ===== --- Amount of args --- ===== --- ===== --- \\ 
-
+#pragma region Quantity_of_args
         /**
          * @brief Works if the amount of args is N.   
          */
@@ -295,11 +288,9 @@ namespace xenon {
          */
         template<typename... Ts>
         concept odd_n_args = (sizeof...(Ts) % 2 != 0);
-
+#pragma endregion Quantity_of_args
         
-
-        // --- ===== --- ===== --- Iterators --- ===== --- ===== --- \\ 
-
+#pragma region Iterators
         /**
          * @brief Works if T class has begin function.  
          */
@@ -416,6 +407,7 @@ namespace xenon {
             requires std::is_class_v<T>;
             requires has_iterator<T> && has_reverse_iterator<T> && has_const_iterator<T> && has_const_reverse_iterator<T>;
         };
+#pragma endregion Iterators
     } // namespace concepts
 } // namespace xenon
 
