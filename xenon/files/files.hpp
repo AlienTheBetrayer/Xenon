@@ -13,6 +13,10 @@
 
 namespace xenon {
     namespace files {
+        /**
+         * @brief Writing mode that can be used when writing to files.  
+         * @note   
+         */
         enum class writing_mode {
             overwrite = std::ios_base::in | std::ios_base::out,
             append = std::ios_base::app
