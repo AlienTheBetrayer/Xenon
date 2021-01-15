@@ -30,8 +30,7 @@
 
 namespace xenon {
     namespace console {
-        // --- ===== --- ===== --- Fundamental get functions --- ===== --- ===== --- \\ 
-
+#pragma region Fundamental_get_functions
         /**
          * @brief Gets the std handle of the console.
          * @note 
@@ -52,11 +51,9 @@ namespace xenon {
             const HWND window = GetConsoleWindow();
             return window;
         }
+#pragma endregion Fundamental_get_functions
 
-
-
-        // --- ===== --- ===== --- Get console's property functions --- ===== --- ===== --- \\ 
-
+#pragma region Get_consoles_property_functions
         /**
          * @brief Gets the console's buffer size. 
          * @note 
@@ -88,11 +85,9 @@ namespace xenon {
             xenon::utilities::Rect<uint32_t> c_rect = get_window_bounds();
             return xenon::utilities::Vector2<uint32_t>{ c_rect.right - c_rect.left, c_rect.bottom - c_rect.top };
         }
+#pragma endregion Get_consoles_property_functions
 
-
-
-        // --- ===== --- ===== --- Set console's property functions --- ===== --- ===== --- \\ 
-
+#pragma region Set_consoles_property_functions
         /**
          * @brief Sets the console's window size
          * @note 
@@ -159,11 +154,9 @@ namespace xenon {
             GetConsoleTitleA(str, 128);
             return std::string(str);
         }
+#pragma endregion Set_consoles_property_functions
 
-
-
-        // --- ===== --- ===== --- Misc --- ===== --- ===== --- \\ 
-
+#pragma region Misc
         [[nodiscard]] bool is_cursor_within_bounds(void) noexcept {
             RECT c_rect;
             POINT m_point;
@@ -171,11 +164,9 @@ namespace xenon {
             GetCursorPos(&m_point);
             return m_point.x >= c_rect.left && m_point.x <= c_rect.right && m_point.y >= c_rect.top && m_point.y <= c_rect.bottom;
         }
+#pragma endregion Misc
 
-
-
-        // --- ===== --- ===== --- Buffer --- ===== --- ===== --- \\ 
-        
+#pragma region Buffer
         /**
          * @brief All the colors that can be used.  
          */
@@ -288,6 +279,7 @@ namespace xenon {
         void axis_color_print(const std::string& text, const std::string& color, const xenon::utilities::Vector2<int32_t>& axis) noexcept {
             axis_color_print(text, colors[color], axis);
         }
+#pragma endregion Buffer
     } // namespace console
 } // namespace xenon
 

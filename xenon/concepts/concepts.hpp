@@ -22,7 +22,6 @@ namespace {
 namespace xenon {
     namespace concepts {
         // --- ===== --- ===== --- Other --- ===== --- ===== --- \\ 
-
         /**
          * @brief Works with any T.  
          */
@@ -34,7 +33,6 @@ namespace xenon {
          */
         template<typename T>
         concept always_unsatisfied = false;
-
 
 
         // --- ===== --- ===== --- Types --- ===== --- ===== --- \\ 
