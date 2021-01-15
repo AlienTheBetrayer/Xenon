@@ -10,6 +10,10 @@
 #include <string>
 #include <optional>
 #include <vector>
+#include <functional>
+#include <filesystem>
+
+namespace fs = std::filesystem;
 
 namespace xenon {
     namespace files {
@@ -121,6 +125,30 @@ namespace xenon {
                 return true;
             } else [[unlikely]]
                 return false;
+        }
+
+        /**
+         * @brief Iterates a directory and calls a function with each path.
+         * @note   
+         * @param  path: The path to the specified directory.
+         * @param  callback_func: A function that will be called with each path.
+         * @retval None
+         */
+        void iterate_folder(const std::string& path, const std::function<void(const std::string&)>& callback_func) noexcept {
+            for(const auto& dir : fs::directory_iterator(path))
+                callback_func(dir.path().string());
+        }
+
+        /**
+         * @brief Recursively iterates a directory and calls a function with each path.
+         * @note   
+         * @param  path: The path to the specified directory.
+         * @param  callback_func: A function that will be called with each path.
+         * @retval None
+         */
+        void recursive_iterate_folder(const std::string& path, const std::function<void(const std::string&)>& callback_func) noexcept {
+            for(const auto& dir : fs::recursive_directory_iterator(path))
+                callback_func(dir.path().string());
         }
     } // namespace files
 } // namespace xenon
