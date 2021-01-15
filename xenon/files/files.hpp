@@ -13,6 +13,11 @@
 
 namespace xenon {
     namespace files {
+        enum class writing_mode {
+            overwrite = std::ios_base::in | std::ios_base::out,
+            append = std::ios_base::app
+        };
+
         /**
          * @brief Reads the file and returns a string, containing all the file's data.
          * @note   
@@ -74,8 +79,8 @@ namespace xenon {
          * @param  content: The content that will be written to that file
          * @retval Status of the opened file. True if opened correctly. 
          */
-        bool write_file(const std::string& path, const std::string& content) noexcept {
-            if(std::ofstream file(path); file.good() && file.is_open()) [[likely]] {
+        bool write_file(const std::string& path, const std::string& content, const writing_mode open_mode = writing_mode::overwrite) noexcept {
+            if(std::ofstream file(path, static_cast<std::ios_base::openmode>(open_mode)); file.good() && file.is_open()) [[likely]] {
                 file << content;
                 file.close();
                 return true;
@@ -90,8 +95,8 @@ namespace xenon {
          * @param  content: The content that will be written to that file
          * @retval Status of the opened file. True if opened correctly. 
          */
-        bool write_file(const std::string& path, const std::vector<std::string>& content) noexcept {
-            if(std::ofstream file(path); file.good() && file.is_open()) [[likely]] {
+        bool write_file(const std::string& path, const std::vector<std::string>& content, const writing_mode open_mode = writing_mode::overwrite) noexcept {
+            if(std::ofstream file(path, static_cast<std::ios_base::openmode>(open_mode)); file.good() && file.is_open()) [[likely]] {
                 for(const std::string& line : content)
                     file << line << "\n";
                 file.close();
