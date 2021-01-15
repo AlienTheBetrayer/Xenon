@@ -26,7 +26,7 @@ namespace xenon {
          * @brief Reads the file and returns a string, containing all the file's data.
          * @note   
          * @param  path: The path for the specified file 
-         * @retval 
+         * @retval A string, which contains all the file's data
          */
         [[nodiscard]] std::optional<std::string> read_file(const std::string& path) noexcept {
             if(std::ifstream file(path); file.good() && file.is_open()) [[likely]] {
@@ -34,7 +34,7 @@ namespace xenon {
                 for(std::string line; std::getline(file, line);)
                     text += line;
                 file.close();
-                return std::optional<std::string>(text);
+                return text;
             } else [[unlikely]]
                 return std::nullopt;
         }
