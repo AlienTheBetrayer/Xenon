@@ -16,7 +16,7 @@ Checkmark means that the module is either done or a large part of work has been 
 - [x] Async
 - [x] Concepts
 - [x] Console
-- [ ] Files
+- [x] Files
 - [ ] Keys
 - [ ] Misc
 - [ ] Mouse
