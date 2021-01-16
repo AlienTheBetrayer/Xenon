@@ -36,7 +36,7 @@ namespace xenon {
              */
             template<typename T>
                 requires xenon::concepts::integral<T>
-            [[nodiscard]] T get_integral(const T from, const T to) noexcept {
+            [[nodiscard]] inline T get_integral(const T from, const T to) noexcept {
                 std::uniform_int_distribution<T> distr(from, to);
                 return static_cast<T>(distr(*gen.get()));
             }
@@ -50,7 +50,7 @@ namespace xenon {
              */
             template<typename T>
                 requires xenon::concepts::floating_point<T>
-            [[nodiscard]] T get_floating_point(const T from, const T to) noexcept {
+            [[nodiscard]] inline T get_floating_point(const T from, const T to) noexcept {
                 std::uniform_real_distribution<T> distr(from, to);
                 return static_cast<T>(distr(*gen.get()));
             }
@@ -117,7 +117,7 @@ namespace xenon {
                     ss << get_integral<int32_t>(0, 15);
                 return ss.str();
             }
-            
+
             ~random_engine(void) noexcept = default;
         private:
             std::unique_ptr<std::mt19937> gen;
