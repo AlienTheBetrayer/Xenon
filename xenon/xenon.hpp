@@ -134,6 +134,7 @@ namespace xenon {
 #include "async/async.hpp"
 #include "utilities/utilities.hpp"
 #include "files/files.hpp"
+#include "random/random.hpp"
 
 // Windows-only includes
 #ifdef XENON_M_WIN
