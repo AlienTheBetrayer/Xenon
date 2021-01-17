@@ -21,7 +21,7 @@ Checkmark means that the module is either done or a large part of work has been 
 - [ ] Misc
 - [ ] Mouse
 - [ ] Process
-- [ ] Random
+- [x] Random
 - [ ] Sound
 - [ ] String
 - [ ] Time
