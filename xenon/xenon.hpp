@@ -135,6 +135,7 @@ namespace xenon {
 #include "utilities/utilities.hpp"
 #include "files/files.hpp"
 #include "random/random.hpp"
+#include "time/time.hpp"
 
 // Windows-only includes
 #ifdef XENON_M_WIN
