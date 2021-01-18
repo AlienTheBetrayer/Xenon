@@ -7,7 +7,6 @@
 
 // Libraries
 #include <thread>
-#include <functional>
 #include <iostream>
 #include <utility>
 

@@ -37,7 +37,7 @@ namespace xenon {
                             break;
                     }
                 };
-                m_async ? xenon::async::run<void>(function, std::forward<Args>(args)...) : function(std::forward<Args>(args)...);
+                m_async ? xenon::async::run(function, std::forward<Args>(args)...) : function(std::forward<Args>(args)...);
             }
 
             /**

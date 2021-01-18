@@ -6,7 +6,7 @@
 #define XENON_HG_TIME_MODULE
 
 // Libraries
-#include <functional>
+#include <memory>
 
 // Other parts of the Time component
 #include "clock.hpp"
@@ -55,6 +55,32 @@ namespace xenon {
         template<typename F, typename... Args>
         inline void set_sync_timeout(F&& func, const uint32_t timeout, Args&&... args) noexcept {
             XENON_HF_set_timeout(func, timeout, false, std::forward<Args>(args)...);
+        }
+
+        /**
+         * @brief Every single waited timeout the function is gonna be asynchronously called.
+         * @note   
+         * @param  func: The function
+         * @param  timeout: The amount of milliseconds between each interval
+         * @param  args: Args
+         * @retval 
+         */
+        template<typename F, typename... Args>
+        std::unique_ptr<interval<F, Args...>> set_async_interval(F&& func, const uint32_t timeout, Args&&... args) noexcept {
+            return std::make_unique<interval<F, Args...>>(std::forward<F>(func), timeout, true, std::forward<Args>(args)...);
+        }
+
+        /**
+         * @brief Every single waited timeout the function is gonna be synchronously called.
+         * @note   
+         * @param  func: The function
+         * @param  timeout: The amount of milliseconds between each interval
+         * @param  args: Args
+         * @retval 
+         */
+        template<typename F, typename... Args>
+        std::unique_ptr<interval<F, Args...>> set_sync_interval(F&& func, const uint32_t timeout, Args&&... args) noexcept {
+            return std::make_unique<interval<F, Args...>>(std::forward<F>(func), timeout, false, std::forward<Args>(args)...);
         }
     } // namespace time
 } // namespace xenon
