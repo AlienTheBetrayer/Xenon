@@ -23,20 +23,10 @@ namespace xenon {
 		* @note
 		* @retval None
 		*/
-		template<typename Ret = void, typename... Args>
-		inline void run(const std::function<Ret(Args...)>& func, Args&&... args) noexcept {
+		template<typename F, typename... Args>
+			requires xenon::concepts::callable<F, Args...>
+		inline void run(F&& func, Args&&... args) noexcept {
 			std::thread(func, std::forward<Args>(args)...).detach();
-		}
-
-		/**
-		* @brief Runs a function in a separate thread with a specified return type without any arguments.
-		* @param func: The function itself
-		* @note
-		* @retval None
-		*/
-        template<typename Ret = void>
-		inline void run(const std::function<Ret(void)>& func) noexcept {
-			std::thread(func).detach();
 		}
 
 		/**
@@ -47,27 +37,14 @@ namespace xenon {
 		* @note
 		* @retval None
 		*/
-		template<typename Ret, typename... Args>
-			requires !xenon::concepts::void_<Ret>
-		inline void then(const std::function<Ret(Args...)>& callback_func, const std::function<void(Ret)>& work_func, Args&&... args) noexcept {
-			std::thread([=, &args...]() {
+		template<typename Ret, typename F, typename F_, typename... Args>
+			requires !xenon::concepts::void_<Ret> && requires(F&& func, Ret& ret, Args&&... args) {
+				ret = func(std::forward<Args>(args)...);
+			} && xenon::concepts::callable<F_, Ret>
+		inline void then(F&& callback_func, F_&& work_func, Args&&... args) noexcept {
+			xenon::async::run([=, &args...](){
 				work_func(callback_func(std::forward<Args>(args)...));
-			}).detach();
-		}
-
-		/**
-		* @brief Calls work_func asynchronously with results from callback_func, which gets called asynchronously.
-		* @param callback_func: The function which returns something
-		* @param work_func: The function which accepts that something that callback_func returns
-		* @note
-		* @retval None
-		*/
-		template<typename Ret>
-			requires !xenon::concepts::void_<Ret>
-		inline void then(const std::function<Ret(void)>& callback_func, const std::function<void(Ret)>& work_func) noexcept {
-			std::thread([=]() {
-				work_func(callback_func());
-			}).detach();
+			});
 		}
     } // namespace async
 } // namespace xenon

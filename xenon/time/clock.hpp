@@ -27,7 +27,7 @@ namespace xenon {
         /**
          * @brief A type for all the time points that will be used.
          * @note
-         */*      
+         */  
         using timepoint_t = std::chrono::time_point<std::chrono::high_resolution_clock>;
 
         /**
