@@ -24,7 +24,7 @@ Checkmark means that the module is either done or a large part of work has been 
 - [x] Random
 - [ ] Sound
 - [ ] String
-- [ ] Time
+- [x] Time
 - [x] Utility
 - [ ] Window
 ## Roadmap
