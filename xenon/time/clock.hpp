@@ -36,9 +36,19 @@ namespace xenon {
          */
         class clock final {
         public:
+            /**
+             * @brief Constructs the clock class and starts the timer.
+             * @note   
+             */
             clock(void) noexcept {
                 m_start = std::chrono::high_resolution_clock::now();
             }
+
+            /**
+             * @brief A default destructor.  
+             * @note 
+             */
+            ~clock(void) noexcept = default;
 
             /**
              * @brief Ends the clock. 
