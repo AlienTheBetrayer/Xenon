@@ -9,6 +9,10 @@
 
 namespace xenon {
     namespace time {
+        /**
+         * @brief All the time order types that you can use in clock class.  
+         * @note   
+         */
         enum class time_order {
             // Seconds
             s, 
@@ -20,16 +24,28 @@ namespace xenon {
             ns
 		};
 
-        // A type for all the time points that will be used.
+        /**
+         * @brief A type for all the time points that will be used.
+         * @note
+         */*      
         using timepoint_t = std::chrono::time_point<std::chrono::high_resolution_clock>;
 
+        /**
+         * @brief A clock class that is used to measure time. Starts when constructed.  
+         * @note   
+         */
         class clock final {
         public:
             clock(void) noexcept {
                 m_start = std::chrono::high_resolution_clock::now();
             }
 
-            void end(void) noexcept {
+            /**
+             * @brief Ends the clock. 
+             * @note   
+             * @retval None
+             */
+            void stop(void) noexcept {
                 m_end = std::chrono::high_resolution_clock::now();
             }
 
