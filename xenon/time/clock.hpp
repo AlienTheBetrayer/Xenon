@@ -1,4 +1,4 @@
-// time.hpp
+// clock.hpp
 //
 // A clock class that is a part of a Time module.
 

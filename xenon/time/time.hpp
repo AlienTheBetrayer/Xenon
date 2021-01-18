@@ -10,6 +10,7 @@
 
 // Other parts of the Time component
 #include "clock.hpp"
+#include "interval.hpp"
 
 // Dependencies
 #include "../async/async.hpp"
