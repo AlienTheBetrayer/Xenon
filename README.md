@@ -18,7 +18,7 @@ Checkmark means that the module is either done or a large part of work has been 
 - [x] Console
 - [x] Files
 - [ ] Keys
-- [ ] Module
+- [ ] Modules
 - [ ] Misc
 - [ ] Mouse
 - [ ] Process
