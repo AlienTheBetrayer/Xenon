@@ -57,6 +57,15 @@ namespace xenon {
     } // namespace keys
 #endif // XENON_M_WIN
 
+#ifdef XENON_M_WIN
+    /**
+     * @brief Module that is able to work with modules. Windows-only.  
+     */
+    namespace modules {
+
+    }
+#endif // XENON_M_WIN
+
     /**
      * @brief Module that has other stuff that no other module has.
      */
@@ -140,6 +149,7 @@ namespace xenon {
 // Windows-only includes
 #ifdef XENON_M_WIN
 #include "console/console.hpp"
+#include "process/process.hpp"
 #endif
 
 #else // XENON_M_CPP17GRT

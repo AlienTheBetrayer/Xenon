@@ -41,7 +41,7 @@ namespace xenon {
          */
         template<typename F, typename... Args>
         inline void set_async_timeout(F&& func, const uint32_t timeout, Args&&... args) noexcept {
-            XENON_HF_set_timeout(func, timeout, true, std::forward<Args>(args)...);
+            XENON_HF_set_timeout(std::forward<F>(func), timeout, true, std::forward<Args>(args)...);
         }
 
         /**
@@ -54,7 +54,7 @@ namespace xenon {
          */
         template<typename F, typename... Args>
         inline void set_sync_timeout(F&& func, const uint32_t timeout, Args&&... args) noexcept {
-            XENON_HF_set_timeout(func, timeout, false, std::forward<Args>(args)...);
+            XENON_HF_set_timeout(std::forward<F>(func), timeout, false, std::forward<Args>(args)...);
         }
 
         /**
