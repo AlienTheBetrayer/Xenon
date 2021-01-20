@@ -128,6 +128,13 @@ namespace xenon {
             return GetProcessId(handle);
         }
 
+        /**
+         * @brief Gets the HANDLE from HWND
+         * @note   
+         * @param  window: The window HWND 
+         * @param  access: The access to open that window
+         * @retval The handle to that process
+         */
         [[nodiscard]] HANDLE get_hwnd(const HWND window, const DWORD access = PROCESS_ALL_ACCESS) noexcept {
             DWORD pid;
             GetWindowThreadProcessId(window, &pid);
