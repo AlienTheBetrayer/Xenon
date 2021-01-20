@@ -17,6 +17,13 @@
  */
 namespace xenon {
     /**
+     * @brief Module that is able to work with args and parameter packs.  
+     */
+    namespace args {
+
+    }
+
+    /**
      * @brief Module that is able to perform asynchronous operations.   
      */
     namespace async {

@@ -127,6 +127,12 @@ namespace xenon {
         [[nodiscard]] DWORD get_pid(const HANDLE handle) noexcept {
             return GetProcessId(handle);
         }
+
+        [[nodiscard]] HANDLE get_hwnd(const HWND window, const DWORD access = PROCESS_ALL_ACCESS) noexcept {
+            DWORD pid;
+            GetWindowThreadProcessId(window, &pid);
+            return xenon::process::open_process_id(pid, access);
+        }
     } // namespace proces
 } // namespace xenon
 
