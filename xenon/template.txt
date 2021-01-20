@@ -1,0 +1,15 @@
+// O.hpp
+//
+// Xenon's ...
+
+#ifndef XENON_HG_O_MODULE
+#define XENON_HG_O_MODULE
+
+
+namespace xenon {
+    namespace O {
+
+    } // namespace O
+} // namespace xenon
+
+#endif // XENON_HG_O_MODULE

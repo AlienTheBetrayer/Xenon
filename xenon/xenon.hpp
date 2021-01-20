@@ -157,6 +157,7 @@ namespace xenon {
 #ifdef XENON_M_WIN
 #include "console/console.hpp"
 #include "process/process.hpp"
+#include "modules/modules.hpp"
 #endif
 
 #else // XENON_M_CPP17GRT

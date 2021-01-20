@@ -60,7 +60,7 @@ namespace xenon {
             requires requires(F&& func, procinfo_t&& pe32) {
                 requires std::is_same_v<decltype(func(pe32)), bool>;
             }
-        [[nodiscard]] inline void process_list_for_each(F&& func) noexcept {
+        [[nodiscard]] inline void list_for_each(F&& func) noexcept {
             HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);  
             procinfo_t entry;
             entry.dwSize = sizeof(procinfo_t);
@@ -80,7 +80,7 @@ namespace xenon {
         [[nodiscard]] std::optional<procinfo_t> find_process_name(const std::string& process_name) noexcept {
             procinfo_t info = {};
             info.dwSize = 0;
-            process_list_for_each([&](const procinfo_t& info_) noexcept -> bool {
+            list_for_each([&](const procinfo_t& info_) noexcept -> bool {
                 if(!strcmp(info_.szExeFile, process_name.c_str())) [[unlikely]] {
                     info = info_;
                     return false;
