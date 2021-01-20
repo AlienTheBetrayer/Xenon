@@ -17,6 +17,7 @@
 #include <Windows.h>
 #include <TlHelp32.h>
 #include <optional>
+#include <type_traits>
 #include <string>
 
 // Data types
@@ -57,9 +58,7 @@ namespace xenon {
          */
         template<typename F>    
             requires requires(F&& func, procinfo_t&& pe32) {
-                // TODO: make this test if the return type is boolean(make sure to do this on all the functions in the library!)
-
-                func(pe32);
+                requires std::is_same_v<decltype(func(pe32)), bool>;
             }
         [[nodiscard]] inline void process_list_for_each(F&& func) noexcept {
             HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);  

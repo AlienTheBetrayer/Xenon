@@ -37,8 +37,8 @@ namespace xenon {
 		* @retval None
 		*/
 		template<typename Ret, typename F, typename F_, typename... Args>
-			requires !xenon::concepts::void_<Ret> && requires(F&& func, Ret& ret, Args&&... args) {
-				ret = func(std::forward<Args>(args)...);
+			requires !xenon::concepts::void_<Ret> && requires(F&& func, Args&&... args) {
+				requires std::is_convertible_v<decltype(func(std::forward<Args>(args)...)), Ret>;
 			} && xenon::concepts::callable<F_, Ret>
 		inline void then(F&& callback_func, F_&& work_func, Args&&... args) noexcept {
 			xenon::async::run([=, &args...](){

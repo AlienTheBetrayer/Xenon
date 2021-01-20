@@ -10,7 +10,6 @@
 #include <string>
 #include <optional>
 #include <vector>
-#include <functional>
 #include <filesystem>
 
 namespace fs = std::filesystem;
@@ -134,7 +133,11 @@ namespace xenon {
          * @param  callback_func: A function that will be called with each path.
          * @retval None
          */
-        void iterate_folder(const std::string& path, const std::function<void(const std::string&)>& callback_func) noexcept {
+        template<typename F>
+            requires requires(F&& func, const std::string& str) {
+                func(str);
+            }
+        inline void iterate_folder(const std::string& path, F&& callback_func) noexcept {
             for(const auto& dir : fs::directory_iterator(path))
                 callback_func(dir.path().string());
         }
@@ -146,7 +149,11 @@ namespace xenon {
          * @param  callback_func: A function that will be called with each path.
          * @retval None
          */
-        void recursive_iterate_folder(const std::string& path, const std::function<void(const std::string&)>& callback_func) noexcept {
+        template<typename F>
+            requires requires(F&& func, const std::string& str) {
+                func(str);
+            }
+        inline void recursive_iterate_folder(const std::string& path, F&& callback_func) noexcept {
             for(const auto& dir : fs::recursive_directory_iterator(path))
                 callback_func(dir.path().string());
         }
