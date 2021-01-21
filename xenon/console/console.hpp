@@ -89,19 +89,6 @@ namespace xenon {
 
 #pragma region Set_consoles_property_functions
         /**
-         * @brief Sets the console's window size
-         * @note 
-         * @param  size: New size
-         * @retval None
-         */
-        void set_window_size(const xenon::utilities::Vector2<uint32_t>& size) noexcept {
-            const HWND window = get_window();
-            RECT c_rect;
-            GetWindowRect(window, &c_rect);
-            MoveWindow(window, c_rect.left, c_rect.top, size.x, size.y, TRUE);
-        }
-
-        /**
          * @brief Sets the new buffer size for the console.
          * @note 
          * @param size: New size of the console's window buffer
@@ -110,28 +97,6 @@ namespace xenon {
         void set_buffer_size(const xenon::utilities::Vector2<uint32_t>& size) noexcept {
             COORD buffer = { static_cast<int16_t>(size.x), static_cast<int16_t>(size.y) };
             SetConsoleScreenBufferSize(get_handle(), buffer);
-        }
-
-        /**
-         * @brief Sets the new window bounds.
-         * @note 
-         * @param bounds: New bounds of the console's window
-         * @retval None
-         */
-        void set_window_bounds(const xenon::utilities::Rect<uint32_t>& bounds) noexcept {
-            SetWindowPos(get_window(), nullptr, bounds.left, bounds.top, bounds.right - bounds.left, bounds.bottom - bounds.top, SWP_NOZORDER);
-        }
-
-        /**
-         * @brief Puts the console's window at the center of your screen.
-         * @note 
-         * @retval None
-         */
-        void center(void) noexcept {
-            RECT c_rect, m_rect;
-            GetWindowRect(get_window(), &c_rect);
-            GetWindowRect(GetDesktopWindow(), &m_rect);
-            SetWindowPos(get_window(), nullptr, m_rect.right / 2 - (c_rect.right - c_rect.left) / 2, m_rect.bottom / 2 - (c_rect.bottom - c_rect.top) / 2 , 0, 0, SWP_NOSIZE | SWP_NOZORDER);
         }
 
         /**
@@ -155,16 +120,6 @@ namespace xenon {
             return std::string(str);
         }
 #pragma endregion Set_consoles_property_functions
-
-#pragma region Misc
-        [[nodiscard]] bool is_cursor_within_bounds(void) noexcept {
-            RECT c_rect;
-            POINT m_point;
-            GetWindowRect(get_window(), &c_rect);
-            GetCursorPos(&m_point);
-            return m_point.x >= c_rect.left && m_point.x <= c_rect.right && m_point.y >= c_rect.top && m_point.y <= c_rect.bottom;
-        }
-#pragma endregion Misc
 
 #pragma region Buffer
         /**
