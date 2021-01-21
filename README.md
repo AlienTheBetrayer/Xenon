@@ -28,7 +28,7 @@ Checkmark means that the module is either done or a large part of work has been 
 - [ ] String
 - [x] Time
 - [x] Utility
-- [ ] Window
+- [x] Window
 ## Roadmap
 - Finish all the modules
 - Make include settings
